@@ -1,0 +1,15 @@
+<html>
+  <h1><%=@cat.name%></h1>
+    <table style="width:50%">
+      <% @cat.attributes.each do |attribute, val| %>
+      <tr>
+        <td>
+          <%=attribute%>
+        </td>
+        <td>
+          <%=val%>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+</html>

@@ -1,0 +1,58 @@
+<html>
+
+
+  <form action= "<%= @cat.persisted? ? cat_url(@cat.id) : cats_url %>" method="post">
+
+
+    <input type="hidden" name="_method" value="<%= @cat.persisted? ? "PATCH" : "POST" %>" >
+
+    <label for="cat_name">Name</label><br>
+    <input type="text" name="cat[name]" id="cat_name" value="<%= @cat.name %>">
+
+    <br>
+    <br>
+
+    <input type="radio" name="cat[sex]" id="cat_sex_female" value="F" <%= "checked" if @cat.sex == "F"%> >
+    <label for="cat_sex_female">Female</label>
+
+    <input type="radio" name="cat[sex]" id="cat_sex_male" value="M" <%= "checked" if @cat.sex == "M"%> >
+    <label for="cat_sex_male">Male</label>
+
+    <br>
+    <br>
+
+    <label for="cat_coat_color">Coat color</label>
+    <br>
+    <!-- dropdown -->
+    <select name="cat[color]" id="cat_coat_color">
+      <option></option>
+      <option value="brown" <%= "selected" if @cat.color == "brown"%> >Brown</option>
+      <option value="black" <%= "selected" if @cat.color == "black"%> >Black</option>
+      <option value="blue" <%= "selected" if @cat.color == "blue"%> >Blue</option>
+      <option value="tabby" <%= "selected" if @cat.color == "tabby"%> >Tabby</option>
+      <option value="orange" <%= "selected" if @cat.color == "orange"%> >Orange</option>
+      <option value="white" <%= "selected" if @cat.color == "white"%> >White</option>
+    </select>
+
+    <br>
+    <br>
+
+    <label for="cat_birth_date">Birthday</label>
+    <br>
+    <input type="date" name="cat[birth_date]" id="cat_birth_date" value="<%= @cat.birth_date %>">
+
+    <br>
+    <br>
+
+    <label for="cat_description">Describe your cat here:</label>
+    <br>
+    <textarea name="cat[description]" id="cat_description" ><%=@cat.description%></textarea>
+
+    <br>
+    <br>
+
+    <input type="submit" value="SUBMIT">
+  </form>
+
+
+</html>
