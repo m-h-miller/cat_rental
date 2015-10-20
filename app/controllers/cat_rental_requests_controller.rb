@@ -1,4 +1,4 @@
-class CatRentalRequestRentalRequestController < AppliCatRentalRequestionController
+class CatRentalRequestsController < ApplicationController
   # def index
   #   @CatRentalRequests = CatRentalRequest.all
   #   render :index
@@ -15,9 +15,12 @@ class CatRentalRequestRentalRequestController < AppliCatRentalRequestionControll
   # end
 
   def new
-    @CatRentalRequest = CatRentalRequest.new
+    @cat_rental_request = CatRentalRequest.new
+    @all_cats = Cat.all
     render :new
   end
+
+
 
   # def create
   #   @CatRentalRequest = CatRentalRequest.new(CatRentalRequests_params)
