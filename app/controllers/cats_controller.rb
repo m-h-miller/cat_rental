@@ -1,4 +1,5 @@
 class CatsController < ApplicationController
+  before_action :ensure_cat_owner, only: [:edit, :update]
 
   def index
     @all_cats = Cat.all
@@ -22,8 +23,10 @@ class CatsController < ApplicationController
 
   def create
     @cat = Cat.new(cats_params)
+    @cat.user_id = current_user.id
 
     if @cat.save
+
       redirect_to cat_url(@cat)
     else
       render json: @cat.errors.full_messages, status: :unprocessable_entity
@@ -43,7 +46,11 @@ class CatsController < ApplicationController
   private
 
   def cats_params
-    params.require(:cat).permit(:birth_date, :color, :name, :sex, :description)
+    params.require(:cat).permit(:id, :birth_date, :color, :name, :sex, :description, :user_id)
   end
 
+  def ensure_cat_owner
+    current_cat = current_user.cats.where('id = ?', params[:id])
+    redirect_to cats_url if current_cat.empty?
+  end
 end

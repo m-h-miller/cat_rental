@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :redirect_if_signed_in
+
   def new
     @user = User.new
     render :new
@@ -16,13 +18,18 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    render :show
+    sign_in(@user)
+    redirect_to cats_url
   end
 
   private
-  
+
   def user_params
     params.require(:user).permit(:user_name, :session_token, :password)
+  end
+
+  def redirect_if_signed_in
+    redirect_to cats_url if signed_in?
   end
 
 end

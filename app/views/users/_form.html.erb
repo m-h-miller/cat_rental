@@ -1,9 +1,10 @@
 <% method = @user.persisted? ? "PATCH" : "POST" %>
 <% submit_text = @user.persisted? ? "Edit user!" : "Create user!"%>
 
-<form action= "<%= user_url %>" method="POST">
-
+<form action= "<%= users_url %>" method="POST">
   <input type="hidden" name="_method" value="<%= method %>">
+
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
   <label for="user_name">User name</label><br>
   <input type="text" name="user[user_name]" id="user_name" value="<%= @user.user_name %>">

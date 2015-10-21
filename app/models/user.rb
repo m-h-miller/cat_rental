@@ -5,6 +5,13 @@ class User < ActiveRecord::Base
   #   self.session_token ||= SecureRandom::urlsafe_base64(16)
   # end
 
+  has_many(
+    :cats,
+    class_name: "Cat",
+    foreign_key: :user_id,
+    primary_key: :id
+  )
+
   def self.find_by_credentials(username, password)
     user = User.find_by_user_name(username)
     return nil if user.nil?

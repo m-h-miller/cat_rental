@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :redirect_if_signed_in, only: [:new, :create]
+
   def new
     @user = User.new
     render :new
@@ -17,6 +19,12 @@ class SessionsController < ApplicationController
   def destroy
     sign_out(current_user)
     redirect_to new_session_url
+  end
+
+  private
+
+  def redirect_if_signed_in
+    redirect_to cats_url if signed_in?
   end
 
 end
