@@ -1,50 +1,23 @@
 class CatRentalRequestsController < ApplicationController
-  # def index
-  #   @CatRentalRequests = CatRentalRequest.all
-  #   render :index
-  # end
-  #
-  # def show
-  #   @CatRentalRequest = CatRentalRequest.find(params[:id])
-  #   render :show
-  # end
-  #
-  # def edit
-  #   @CatRentalRequest = CatRentalRequest.find(params[:id])
-  #   render :edit
-  # end
-
   def new
     @cat_rental_request = CatRentalRequest.new
     @all_cats = Cat.all
     render :new
   end
 
+  def create
+    @cat_rental_request = CatRentalRequest.new(cat_rental_requests_params)
 
-
-  # def create
-  #   @CatRentalRequest = CatRentalRequest.new(CatRentalRequests_params)
-  #
-  #   if @CatRentalRequest.save
-  #     redirect_to CatRentalRequest_url(@CatRentalRequest)
-  #   else
-  #     render json: @CatRentalRequest.errors.full_messages, status: :unprocessable_entity
-  #   end
-  # end
-  #
-  # def update
-  #   @CatRentalRequest = CatRentalRequest.find(params[:id])
-  #
-  #   if @CatRentalRequest.update(CatRentalRequests_params)
-  #     redirect_to CatRentalRequest_url(@CatRentalRequest)
-  #   else
-  #     render(json: @CatRentalRequest.errors.full_messages, status: :unprocessable_entity)
-  #   end
-  # end
+    if @cat_rental_request.save
+      redirect_to cat_url(@cat_rental_request.cat_id)
+    else
+      render json: @cat_rental_request.errors.full_messages, status: :unprocessable_entity
+    end
+  end
 
   private
 
-  def CatRentalRequests_params
-    params.require(:CatRentalRequest).permit(:cat_id, :start_date, :end_date, :status)
+  def cat_rental_requests_params
+    params.require(:cat_rental_requests).permit(:cat_id, :start_date, :end_date, :status)
   end
 end

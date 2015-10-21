@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <html>
+
+<% method = signed_in? ? "DELETE" : "POST" %>
+<% button_text = signed_in? ? "Sign Out" : "Sign In" %>
+
 <head>
   <title>Rental99cats</title>
+  <h1><%= current_user.name if signed_in? %> </h1>
+
+  <form action= "session_url" method = "POST" >
+    <input type="hidden" name="_method" value="<%= method %>" >
+
+    <input type="submit" value="<%= button_text %>">
+  </form>
+
 </head>
 <body>
 

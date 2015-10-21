@@ -1,0 +1,25 @@
+<h1>Log in!</h1>
+
+  <form action= "<%= session_url %>" method="POST">
+
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <label for="user_name">User name</label><br>
+    <input type="text" name="user[user_name]" id="user_name" value="<%= @user.user_name unless @user.nil? %>">
+
+    <br><br>
+
+    <label for="user_password">Password</label><br>
+    <input type="password" name="user[password]" id="user_password">
+
+    <br><br>
+
+    <input type="submit" value="Log in!">
+
+  </form>
+
+  <br><br>
+
+  <form action="<%= new_user_url %>">
+    <input type="submit" value="Register a new user!">
+  </form>
